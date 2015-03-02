@@ -1,7 +1,7 @@
 
 import java.awt.Color;
 
-public class WaterSource implements Item {
+public class WaterSource extends Item {
     public Point position;
     
     public WaterSource(Point position) {

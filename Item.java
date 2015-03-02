@@ -1,8 +1,10 @@
 
 import java.awt.Color;
 
-public interface Item {
-    public void tick(Item[] sistema, float dt);
-    public Point getPosition();
-    public Color getColor();
+abstract public class Item {
+    abstract public void tick(Item[] sistema, float dt);
+    abstract public Point getPosition();
+    public Color getColor() {
+        return Color.BLACK;
+    }
 }
