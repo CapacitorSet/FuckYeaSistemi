@@ -21,7 +21,7 @@ public class FuckYeaSistemi extends JFrame {
         float zoom = 4f;
         g.clearRect(0, 0, getWidth(), getHeight());
         for (Item a : sistema) {
-            g.setColor(a.getColor());
+            g.setColor(a.color);
             g.fillOval((int) (zoom * a.x + getWidth() / 2),
                        (int) (zoom * a.y + getHeight() / 2), 10, 10);
         }
