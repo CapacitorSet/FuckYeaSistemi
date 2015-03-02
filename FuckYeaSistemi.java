@@ -13,12 +13,14 @@ public class FuckYeaSistemi extends JFrame {
     static int delay = 50;
     
     public FuckYeaSistemi() {
-        sistema = new Item[1];
-        sistema[0] = new WaterSource(0,0);
+        sistema = new Item[2];
+        sistema[0] = new WaterSource(0, 0);
+        sistema[1] = new Prey(10, 10);
     }
 
     public void paint(Graphics g) {
         float zoom = 4f;
+        float dt = 0.01f;
         g.clearRect(0, 0, getWidth(), getHeight());
         for (Item a : sistema) {
             g.setColor(a.color);
