@@ -18,17 +18,17 @@ public abstract class GravityItem extends Item {
         return result;
     }
 
-    public Vector totalAcceleration(GravityItem[] system) {
+    public Vector totalAcceleration(Item[] system) {
         Vector result = new Vector();
-        for (GravityItem a : system) {
-            if (a != this) {
-                result.add(accelerationTo(a));
+        for (Item a : system) {
+            if (a != this && a instanceof GravityItem) {
+                result.add(accelerationTo((GravityItem) a));
             }
         }
         return result;
     }
 
-    public void updateVelocity(GravityItem[] system, float dt) {
+    public void updateVelocity(Item[] system, float dt) {
         Vector acceleration = totalAcceleration(system);
         this.xVelocity += dt * acceleration.dX;
         this.yVelocity += dt * acceleration.dY;

@@ -26,7 +26,10 @@ public class FuckYeaSistemi extends JFrame {
                        (int) (zoom * a.y + getHeight() / 2), 10, 10);
         }
         for (Item a : sistema) {
-            a.tick(sistema, dt);
+            a.velocityTick(sistema, dt);
+        }
+        for (Item a : sistema) {
+            a.positionTick(dt);
         }
     }
 

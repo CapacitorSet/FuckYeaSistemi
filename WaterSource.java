@@ -13,8 +13,13 @@ public class WaterSource extends Item {
     }
 
     @Override
-    public void tick(Item[] sistema, float dt) {
-        // Do nothing, water sources don't "evolve"
+    public void velocityTick(Item[] sistema, float dt) {
+        return;
+    }
+    
+    @Override
+    public void positionTick(float dt) {
+        return;
     }
 
     @Override
