@@ -2,24 +2,19 @@
 import java.awt.Color;
 
 public class WaterSource extends Item {
-    public Point position;
-    
     public WaterSource(Point position) {
-        this.position = position;
+        this.x = position.x;
+        this.y = position.y;
     }
     
-    public WaterSource(int x, int y, int z) {
-        this.position = new Point(x, y, z);
+    public WaterSource(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override
     public void tick(Item[] sistema, float dt) {
         // Do nothing, water sources don't "evolve"
-    }
-
-    @Override
-    public Point getPosition() {
-        return position;
     }
 
     @Override

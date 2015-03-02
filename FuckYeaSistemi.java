@@ -14,17 +14,16 @@ public class FuckYeaSistemi extends JFrame {
     
     public FuckYeaSistemi() {
         sistema = new Item[1];
-        sistema[0] = new WaterSource(0,0,0);
+        sistema[0] = new WaterSource(0,0);
     }
 
     public void paint(Graphics g) {
         float zoom = 4f;
         g.clearRect(0, 0, getWidth(), getHeight());
         for (Item a : sistema) {
-            Point p = a.getPosition();
             g.setColor(a.getColor());
-            g.fillOval((int) (zoom * p.x + getWidth() / 2),
-                       (int) (zoom * p.y + getHeight() / 2), 10, 10);
+            g.fillOval((int) (zoom * a.x + getWidth() / 2),
+                       (int) (zoom * a.y + getHeight() / 2), 10, 10);
         }
         for (Item a : sistema) {
             a.tick(sistema, dt);

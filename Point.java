@@ -1,14 +1,13 @@
 public class Point {
 
-    public float x, y, z;
+    public float x, y;
 
     public Point() {
 
     }
 
-    public Point(int x, int y, int z) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 }
