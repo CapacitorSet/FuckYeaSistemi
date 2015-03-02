@@ -1,4 +1,3 @@
-
 public class Point {
 
     public float x, y, z;
