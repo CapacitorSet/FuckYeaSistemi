@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.util.List;
 
 public class Prey extends GravityItem {
     
@@ -13,7 +14,7 @@ public class Prey extends GravityItem {
         this.maxSpeed = 50;
     }
     
-    public Vector totalAcceleration(Item[] system) {
+    public Vector totalAcceleration(List<Item> system) {
         Vector result = new Vector();
         for (Item a : system) {
             if (a != this) {
@@ -32,7 +33,7 @@ public class Prey extends GravityItem {
     }
     
     @Override
-    public void velocityTick(Item[] sistema, float dt) {
+    public void velocityTick(List<Item> sistema, float dt) {
         // Do the obvious stuff: on each instant, the velocity increases by dt*acceleration
         Vector acceleration = totalAcceleration(sistema);
         this.xVelocity += dt * acceleration.dX;

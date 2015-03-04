@@ -1,12 +1,13 @@
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.*;
 
 public class FuckYeaSistemi extends JFrame {
 
-    Item[] sistema; // The system at the present state
+    ArrayList<Item> sistema; // The system at the present state
     float dt;       // The simulation step (previous state was "t", next is "t+dt")
 
     static int width = 500;  // Window size
@@ -15,9 +16,9 @@ public class FuckYeaSistemi extends JFrame {
     static int delay = 50; // The real-life delay between one step and another
     
     public FuckYeaSistemi() { // Spawn the initial items
-        sistema = new Item[2];
-        sistema[0] = new WaterSource(0, 0);
-        sistema[1] = new Prey(10, 10);
+        sistema = new ArrayList<Item>();
+        sistema.add(new WaterSource(0, 0));
+        sistema.add(new Prey(10, 10));
     }
 
     public void paint(Graphics g) { // Redraw the items

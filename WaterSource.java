@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.util.List;
 
 public class WaterSource extends Item {
     
@@ -16,7 +17,7 @@ public class WaterSource extends Item {
     }
 
     @Override
-    public void velocityTick(Item[] sistema, float dt) {
+    public void velocityTick(List<Item> sistema, float dt) {
         return;
     }
     
