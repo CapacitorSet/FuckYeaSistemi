@@ -4,13 +4,15 @@ import java.util.List;
 
 public class WaterSource extends Item {
     
-    public WaterSource(Point position) {
+    public WaterSource(FuckYeaSistemi simulazione, Point position) {
+        this.simulazione = simulazione;
         this.color = Color.BLUE;
         this.x = position.x;
         this.y = position.y;
     }
     
-    public WaterSource(int x, int y) {
+    public WaterSource(FuckYeaSistemi simulazione, int x, int y) {
+        this.simulazione = simulazione;
         this.color = Color.BLUE;
         this.x = x;
         this.y = y;

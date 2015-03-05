@@ -1,12 +1,16 @@
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Random;
 
 public class Prey extends GravityItem {
     
     public int WaterSourceFactor; // Basically thirst
+    Random random;
 
-    Prey(int x, int y) { // Spawn a green point at given coordinates. Default thirst is 10k
+    Prey(FuckYeaSistemi simulazione, float x, float y) { // Spawn a green point at given coordinates. Default thirst is 10k
+        random = new Random();
+        this.simulazione = simulazione;
         this.color = Color.GREEN;
         this.x = x;
         this.y = y;
@@ -41,9 +45,26 @@ public class Prey extends GravityItem {
         
         limitSpeed();
 
-        this.WaterSourceFactor += 1000; // Be more thirsty as time passes
+        this.thirstTick();
+        this.birthTick();
     }
 
+    public void thirstTick() {
+        this.WaterSourceFactor += 1000; // Be more thirsty as time passes
+    }
+    
+    public void birthTick() {
+        if (random.nextInt(100)==0) {
+            simulazione.scheduleBirth(
+                new Prey(simulazione, this.x+random.nextInt(20), this.y+random.nextInt(20))
+            );
+        }
+        /* On each tick, there's a 1/100 chance of a new Prey being spawned
+         * (actually, being scheduled for birth) within 20 pixels of the
+         * present one
+         */
+    }
+    
     @Override
     public void positionTick(float dt) {
         this.x += dt * this.xVelocity;

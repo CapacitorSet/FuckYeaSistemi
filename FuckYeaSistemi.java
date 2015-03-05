@@ -8,6 +8,7 @@ import javax.swing.*;
 public class FuckYeaSistemi extends JFrame {
 
     ArrayList<Item> sistema; // The system at the present state
+    ArrayList<Item> births, deaths; // Scheduled births and deaths
     float dt;       // The simulation step (previous state was "t", next is "t+dt")
 
     static int width = 500;  // Window size
@@ -17,10 +18,19 @@ public class FuckYeaSistemi extends JFrame {
     
     public FuckYeaSistemi() { // Spawn the initial items
         sistema = new ArrayList<Item>();
-        sistema.add(new WaterSource(0, 0));
-        sistema.add(new Prey(10, 10));
+        sistema.add(new WaterSource(this, 0, 0));
+        sistema.add(new Prey(this, 10, 10));
+        births = new ArrayList<Item>();
     }
 
+    public void scheduleBirth(Item i) {
+        this.births.add(i);
+    }
+    
+    void spawn(Item i) {
+        sistema.add(i);
+    }
+    
     public void paint(Graphics g) { // Redraw the items
         float zoom = 4f;
         float dt = 0.01f;
@@ -37,6 +47,11 @@ public class FuckYeaSistemi extends JFrame {
             a.positionTick(dt);          // Do a "position tick" on each item.
             // Note: should probably be inlined, since the behaviour can't be customized
         }
+        
+        for (Item a : births) {
+            this.spawn(a);
+        }
+        births.clear();
     }
 
     public static void main(String[] args) {
