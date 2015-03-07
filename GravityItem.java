@@ -8,7 +8,7 @@ public abstract class GravityItem extends Item {
     public static final int G = 1;
 
     // Note: to be moved to the Terrain class to account for slopes and stuff
-    public double distanceTo(Point a) {
+    public final double distanceTo(Point a) {
         return Math.sqrt(Math.pow(a.x - this.x, 2)
                 + Math.pow(a.y - this.y, 2));
     }
@@ -25,7 +25,7 @@ public abstract class GravityItem extends Item {
      * 
      * Below, "thing" = a/d (so that we don't need to compute it twice)
      */
-    public Vector accelerationTo(Item a, float factor) {
+    public final Vector accelerationTo(Item a, float factor) {
         Vector result = new Vector();
         double thing = G / Math.pow(distanceTo(a), 3) * factor;
         result.dX = (a.x - this.x) * thing;
@@ -33,12 +33,12 @@ public abstract class GravityItem extends Item {
         return result;
     }
     
-    public Vector accelerationTo(Item a) {
+    public final Vector accelerationTo(Item a) {
         return accelerationTo(a, 1);
     }
     
     // Limit the speed: if the computed speed is too large, "resize" it without distorting it
-    public void limitSpeed(float maxSpeed) {
+    public final void limitSpeed(float maxSpeed) {
         float speed = (float) Math.sqrt(Math.pow(this.xVelocity, 2) + Math.pow(this.yVelocity, 2));
         if (speed > maxSpeed) {
             this.xVelocity = (this.xVelocity / speed) * this.maxSpeed;
@@ -46,7 +46,7 @@ public abstract class GravityItem extends Item {
         }
     }
     
-    public void limitSpeed() {
+    public final void limitSpeed() {
         limitSpeed(this.maxSpeed);
     }
 }
