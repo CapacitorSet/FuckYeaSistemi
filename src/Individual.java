@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -10,13 +11,14 @@ public abstract class Individual extends GravityItem {
 
 	abstract void loadData();
 
-    public Individual(FuckYeaSistemi simulazione, float x, float y) { // Spawn an individual with the default values
+    Individual(FuckYeaSistemi simulazione, float x, float y) { // Spawn an individual with the default values
         random = new Random();
         this.simulazione = simulazione;
         this.color = Color.GREEN;
         this.x = x;
         this.y = y;
         this.maxSpeed = 50;
+		this.factor = new HashMap<>();
 		loadData();
     }
 
@@ -26,6 +28,7 @@ public abstract class Individual extends GravityItem {
             if (a != this) {
 				String name = a.getClass().getName();
 				if (factor.containsKey(name)) {
+					this.interactWith(a);
 					result.add(accelerationTo(a, factor.get(name)));
                 } else {
                     // Do nothing, object not identified. Feel neither attracted nor pushed away
@@ -34,6 +37,8 @@ public abstract class Individual extends GravityItem {
         }
         return result;
     }
+
+	abstract void interactWith(Item a);
 
     @Override
     public final void velocityTick(List<Item> sistema, float dt) {
