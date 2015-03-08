@@ -15,15 +15,10 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Graphics {
 
-	private static GLFWErrorCallback errorCallback
-			= Callbacks.errorCallbackPrint(System.err);
+	public static int width, height;
 
-	/**
-	 * This key callback will check if ESC is pressed and will close the window
-	 * if it is pressed.
-	 */
+	private static GLFWErrorCallback errorCallback = Callbacks.errorCallbackPrint(System.err);
 	private static GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
-
 		@Override
 		public void invoke(long window, int key, int scancode, int action, int mods) {
 			if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -64,6 +59,8 @@ public class Graphics {
 			width.rewind();
 			height.rewind();
 			int w = width.get(), h = height.get();
+			Graphics.width = w;
+			Graphics.height = h;
 			glViewport(0, 0, w, h);
 			glClear(GL_COLOR_BUFFER_BIT);
 			glMatrixMode(GL_PROJECTION);

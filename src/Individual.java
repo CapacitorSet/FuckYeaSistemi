@@ -58,7 +58,12 @@ public abstract class Individual extends GravityItem {
     @Override
     public final void positionTick(float dt) {
         this.x += dt * this.xVelocity;
+		if (this.x < 0) this.x = 0;
+		if (this.x > Graphics.width) this.x = Graphics.width;
+
         this.y += dt * this.yVelocity;
+		if (this.y < 0) this.y = 0;
+		if (this.y > Graphics.height) this.y = Graphics.height;
     }
 
 }
