@@ -28,18 +28,15 @@ public class Simulazione extends JFrame {
     
     public void tick() { // Redraw the items
         float dt = 0.01f;
+		final float size = 40;
         for (Item a : sistema) {
-			            /* Render triangle */
             glBegin(GL_QUADS);
             glColor3f(a.r, a.g, a.b);
-            glVertex3f(a.x-20f, a.y-20f, 0f);
-            glVertex3f(a.x-20f, a.y+20f, 0f);
-            glVertex3f(a.x+20f, a.y+20f, 0f);
-            glVertex3f(a.x+20f, a.y-20f, 0f);
+            glVertex3f(a.x-size/2, a.y-size/2, 0f);
+            glVertex3f(a.x-size/2, a.y+size/2, 0f);
+            glVertex3f(a.x+size/2, a.y+size/2, 0f);
+            glVertex3f(a.x+size/2, a.y-size/2, 0f);
             glEnd();
-            /*g.setColor(a.color);
-            g.fillOval((int) (zoom * a.x + getWidth() / 2),
-                       (int) (zoom * a.y + getHeight() / 2), 10, 10);*/
         }
         for (Item a : sistema) {
             a.velocityTick(sistema, dt); // Do a "velocity tick" on each item, to update its velocity and stats
