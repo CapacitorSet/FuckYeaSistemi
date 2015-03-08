@@ -13,8 +13,9 @@ public class Simulazione extends JFrame {
     
     public Simulazione() { // Spawn the initial items
         sistema = new ArrayList<Item>();
-        sistema.add(new WaterSource(this, 0, 0));
-        //sistema.add(new Prey(this, 10, 10));
+        sistema.add(new WaterSource(this, 100, 100));
+        sistema.add(new Prey(this, 80, 80));
+        sistema.add(new WaterSource(this, 200, 50));
         births = new ArrayList<Item>();
     }
 
@@ -28,7 +29,7 @@ public class Simulazione extends JFrame {
     
     public void tick() { // Redraw the items
         float dt = 0.01f;
-		final float size = 40;
+		final float size = 20;
         for (Item a : sistema) {
             glBegin(GL_QUADS);
             glColor3f(a.r, a.g, a.b);
