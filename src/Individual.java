@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +10,16 @@ public abstract class Individual extends GravityItem {
 
 	abstract void loadData();
 
-    Individual(FuckYeaSistemi simulazione, float x, float y) { // Spawn an individual with the default values
+    Individual(Simulazione simulazione, float x, float y) { // Spawn an individual with the default values
         random = new Random();
         this.simulazione = simulazione;
-        this.color = Color.GREEN;
+        this.r = 0;
+		this.g = 1;
+		this.b = 0;
         this.x = x;
         this.y = y;
         this.maxSpeed = 50;
-		this.factor = new HashMap<>();
+		this.factor = new HashMap<String, Integer>();
 		loadData();
     }
 

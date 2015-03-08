@@ -1,17 +1,18 @@
 
-import java.awt.Color;
 
 public class Prey extends Individual {
 
 	int thirst;
 
-	Prey(FuckYeaSistemi simulazione, float x, float y) {
+	Prey(Simulazione simulazione, float x, float y) {
 		super(simulazione, x, y);
 	}
 
 	@Override
 	void loadData() {
-		this.color = Color.GREEN;
+		this.r = 0;
+		this.g = 1;
+		this.b = 0;
 		this.maxSpeed = 50;
 		this.thirst = 10000;
 		factor.put("WaterSource", thirst);

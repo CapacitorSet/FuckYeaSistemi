@@ -1,19 +1,20 @@
 
-import java.awt.Color;
 import java.util.List;
 
 public class WaterSource extends Item {
     
-    public WaterSource(FuckYeaSistemi simulazione, Point position) {
+    public WaterSource(Simulazione simulazione, Point position) {
         this.simulazione = simulazione;
-        this.color = Color.BLUE;
+        this.r = this.g = 0;
+		this.b = 1;
         this.x = position.x;
         this.y = position.y;
     }
     
-    public WaterSource(FuckYeaSistemi simulazione, int x, int y) {
+    public WaterSource(Simulazione simulazione, int x, int y) {
         this.simulazione = simulazione;
-        this.color = Color.BLUE;
+        this.r = this.g = 0;
+		this.b = 1;
         this.x = x;
         this.y = y;
     }
