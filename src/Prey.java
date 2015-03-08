@@ -25,7 +25,7 @@ public class Prey extends Individual {
 		 * not negative (actively escaping from water sources).
 		 */
 		factor.put("WaterSource", (thirst > 0 ? thirst : 0));
-		birthTick();
+		//birthTick();
 	}
 
 	public void birthTick() {
@@ -43,7 +43,7 @@ public class Prey extends Individual {
 	public void interactWith(Item i) {
 		if (i instanceof WaterSource && distanceTo(i) <= 10) {
 			// If close to a water source, drink!
-			factor.put("WaterSource", -5000);
+			thirst = -10000;
 		}
 	}
 }
