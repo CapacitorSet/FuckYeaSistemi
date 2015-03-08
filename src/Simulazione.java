@@ -14,8 +14,9 @@ public class Simulazione extends JFrame {
     public Simulazione() { // Spawn the initial items
         sistema = new ArrayList<Item>();
         sistema.add(new WaterSource(this, 100, 100));
-        sistema.add(new Prey(this, 80, 80));
         sistema.add(new WaterSource(this, 200, 50));
+        sistema.add(new Prey(this, 80, 80));
+		sistema.add(new Predator(this, 180, 180));
         births = new ArrayList<Item>();
     }
 
