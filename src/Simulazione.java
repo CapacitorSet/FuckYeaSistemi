@@ -32,10 +32,10 @@ public class Simulazione extends JFrame {
 			            /* Render triangle */
             glBegin(GL_QUADS);
             glColor3f(a.r, a.g, a.b);
-            glVertex3f(a.x-0.5f, a.y-0.5f, 0f);
-            glVertex3f(a.x-0.5f, a.y+0.5f, 0f);
-            glVertex3f(a.x+0.5f, a.y+0.5f, 0f);
-            glVertex3f(a.x+0.5f, a.y-0.5f, 0f);
+            glVertex3f(a.x-20f, a.y-20f, 0f);
+            glVertex3f(a.x-20f, a.y+20f, 0f);
+            glVertex3f(a.x+20f, a.y+20f, 0f);
+            glVertex3f(a.x+20f, a.y-20f, 0f);
             glEnd();
             /*g.setColor(a.color);
             g.fillOval((int) (zoom * a.x + getWidth() / 2),

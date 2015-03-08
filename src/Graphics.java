@@ -100,7 +100,7 @@ public class Graphics {
             /* Set ortographic projection */
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(-ratio, ratio, -1f, 1f, 1f, -1f);
+            glOrtho(0.0f, 640, 480, 0f, 0f, 1f);
             glMatrixMode(GL_MODELVIEW);
 
 			simulazione.tick();
