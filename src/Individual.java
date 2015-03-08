@@ -29,7 +29,7 @@ public abstract class Individual extends GravityItem {
             if (a != this) {
 				String name = a.getClass().getName();
 				if (factor.containsKey(name)) {
-					this.interactWith(a);
+					interactWith(a);
 					result.add(accelerationTo(a, factor.get(name)));
                 } else {
                     // Do nothing, object not identified. Feel neither attracted nor pushed away

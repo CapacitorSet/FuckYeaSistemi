@@ -6,12 +6,12 @@ import static org.lwjgl.opengl.GL11.*;
 public class Simulazione extends JFrame {
 
     ArrayList<Item> sistema; // The system at the present state
+	ArrayList<Item> deaths;  // Items to be killed
     float dt;       // The simulation step (previous state was "t", next is "t+dt")
 
-    static int delay = 50; // The real-life delay between one step and another
-    
     public Simulazione() { // Spawn the initial items
         sistema = new ArrayList<Item>();
+		deaths = new ArrayList<Item>();
         sistema.add(new WaterSource(this, 100, 100));
         sistema.add(new WaterSource(this, 200, 50));
         sistema.add(new Prey(this, 80, 80));
@@ -37,5 +37,18 @@ public class Simulazione extends JFrame {
             a.positionTick(dt);          // Do a "position tick" on each item.
             // Note: should probably be inlined, since the behaviour can't be customized
         }
+
+		for (Item a : deaths) {
+			despawn(a);
+		}
+		deaths.clear();
     }
+
+	public void kill(Item i) {
+		deaths.add(i);
+	}
+
+	private void despawn(Item i) {
+		sistema.remove(i);
+	}
 }

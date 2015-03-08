@@ -16,6 +16,7 @@ public class Prey extends Individual {
 		this.maxSpeed = 50;
 		this.thirst = 10000;
 		factor.put("WaterSource", thirst);
+		factor.put("Predator", -10000);
 	}
 
 	@Override
