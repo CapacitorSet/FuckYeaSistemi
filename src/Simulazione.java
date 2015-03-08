@@ -48,6 +48,11 @@ public class Simulazione extends JFrame {
 		deaths.add(i);
 	}
 
+	public void kill(Item i, String reason) {
+		System.out.println("A " + i.getClass().getName() + " died, reason: " + reason);
+		deaths.add(i);
+	}
+
 	private void despawn(Item i) {
 		sistema.remove(i);
 	}

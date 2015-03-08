@@ -66,4 +66,12 @@ public abstract class Individual extends GravityItem {
 		if (this.y > Graphics.height) this.y = Graphics.height;
     }
 
+	public final void die(String reason) {
+		simulazione.kill(this, reason);
+	}
+
+	public final void die() {
+		simulazione.kill(this);
+	}
+
 }

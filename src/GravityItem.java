@@ -5,7 +5,7 @@ public abstract class GravityItem extends Item {
 
     public float maxSpeed;
     public float xVelocity, yVelocity, zVelocity;
-    public static final int G = 1;
+    public static final int G = 1000;
 
     // Note: to be moved to the Terrain class to account for slopes and stuff
     public final double distanceTo(Point a) {
