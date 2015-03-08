@@ -1,3 +1,5 @@
+// Nothing to see here, just copied from somewhere at StackOverflow and customized a bit
+
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import org.lwjgl.BufferUtils;
@@ -13,113 +15,74 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Graphics {
 
-    /**
-     * This error callback will simply print the error to
-     * <code>System.err</code>.
-     */
-    private static GLFWErrorCallback errorCallback
-            = Callbacks.errorCallbackPrint(System.err);
+	private static GLFWErrorCallback errorCallback
+			= Callbacks.errorCallbackPrint(System.err);
 
-    /**
-     * This key callback will check if ESC is pressed and will close the window
-     * if it is pressed.
-     */
-    private static GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
+	/**
+	 * This key callback will check if ESC is pressed and will close the window
+	 * if it is pressed.
+	 */
+	private static GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
 
-        @Override
-        public void invoke(long window, int key, int scancode, int action, int mods) {
-            if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-                glfwSetWindowShouldClose(window, GL_TRUE);
-            }
-        }
-    };
+		@Override
+		public void invoke(long window, int key, int scancode, int action, int mods) {
+			if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+				glfwSetWindowShouldClose(window, GL_TRUE);
+			}
+		}
+	};
 
-    /**
-     * The main function will create a 640x480 window and renders a rotating
-     * triangle until the window gets closed.
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        long window;
-
-        /* Set the error callback */
-        glfwSetErrorCallback(errorCallback);
-
-        /* Initialize GLFW */
-        if (glfwInit() != GL_TRUE) {
-            throw new IllegalStateException("Unable to initialize GLFW");
-        }
-
-        /* Create window */
-        window = glfwCreateWindow(640, 480, "Fuck yea, sistemi!", NULL, NULL);
-        if (window == NULL) {
-            glfwTerminate();
-            throw new RuntimeException("Failed to create the GLFW window");
-        }
-
-        /* Center the window on screen */
-        ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        glfwSetWindowPos(window,
-                (GLFWvidmode.width(vidmode) - 640) / 2,
-                (GLFWvidmode.height(vidmode) - 480) / 2
-        );
-
-        /* Create OpenGL context */
-        glfwMakeContextCurrent(window);
-        GLContext.createFromCurrent();
-
-        /* Enable vertical synchronization */
-        glfwSwapInterval(1);
-
-        /* Set the key callback */
-        glfwSetKeyCallback(window, keyCallback);
-
-        /* Declare buffers for using inside the loop */
-        IntBuffer width = BufferUtils.createIntBuffer(1);
-        IntBuffer height = BufferUtils.createIntBuffer(1);
+	public static void main(String[] args) {
+		long window;
+		glfwSetErrorCallback(errorCallback);
+		if (glfwInit() != GL_TRUE) {
+			throw new IllegalStateException("Unable to initialize GLFW");
+		}
+		window = glfwCreateWindow(640, 480, "Fuck yea, sistemi!", NULL, NULL);
+		if (window == NULL) {
+			glfwTerminate();
+			throw new RuntimeException("Failed to create the GLFW window");
+		}
+		ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		glfwSetWindowPos(window,
+				(GLFWvidmode.width(vidmode) - 640) / 2,
+				(GLFWvidmode.height(vidmode) - 480) / 2
+		);
+		glfwMakeContextCurrent(window);
+		GLContext.createFromCurrent();
+		glfwSwapInterval(1);
+		glfwSetKeyCallback(window, keyCallback);
+		IntBuffer width = BufferUtils.createIntBuffer(1);
+		IntBuffer height = BufferUtils.createIntBuffer(1);
 
 		Simulazione simulazione = new Simulazione();
 
-        /* Loop until window gets closed */
-        while (glfwWindowShouldClose(window) != GL_TRUE) {
-            float ratio;
+		while (glfwWindowShouldClose(window) != GL_TRUE) {
+			glfwGetFramebufferSize(window, width, height);
+			width.get();
+			height.get();
+			width.rewind();
+			height.rewind();
+			int w = width.get(), h = height.get();
+			glViewport(0, 0, w, h);
+			glClear(GL_COLOR_BUFFER_BIT);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0f, w, h, 0f, 0f, 1f);
+			glMatrixMode(GL_MODELVIEW);
 
-            /* Get width and height to calcualte the ratio */
-            glfwGetFramebufferSize(window, width, height);
-            ratio = width.get() / (float) height.get();
-
-            /* Rewind buffers for next get */
-            width.rewind();
-            height.rewind();
-
-            /* Set viewport and clear screen */
-            glViewport(0, 0, width.get(), height.get());
-            glClear(GL_COLOR_BUFFER_BIT);
-
-            /* Set ortographic projection */
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-            glOrtho(0.0f, 640, 480, 0f, 0f, 1f);
-            glMatrixMode(GL_MODELVIEW);
-
+			/* <code>  */
 			simulazione.tick();
+			/* </code> */
 
-            /* Swap buffers and poll Events */
-            glfwSwapBuffers(window);
-            glfwPollEvents();
-
-            /* Flip buffers for next loop */
-            width.flip();
-            height.flip();
-        }
-
-        /* Release window and its callbacks */
-        glfwDestroyWindow(window);
-        keyCallback.release();
-
-        /* Terminate GLFW and release the error callback */
-        glfwTerminate();
-        errorCallback.release();
-    }
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+			width.flip();
+			height.flip();
+		}
+		glfwDestroyWindow(window);
+		keyCallback.release();
+		glfwTerminate();
+		errorCallback.release();
+	}
 }
