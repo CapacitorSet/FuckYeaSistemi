@@ -14,53 +14,68 @@ It is our goal to create and run a digital simulation of a population with known
 \section{Implementation}
 This section discusses a Java implementation of the system.\\
 
-We have decided to represent the system not as a whole, but rather as a list of items (preys, predators and resources), each being updated upon a "game tick".
-
-\subsection{Desired features}
-Our choice of desirable features is the following:
-\begin{itemize}
-\item ...
-\end{itemize}
-
-\subsection{Natality}
-Upon each tick (of duration $\Delta t$), the natality $N_{rate}$ is determined according to this formula:
-\[
-\frac{\Delta N_{rate}}{\Delta t} = f(t)
-\]
-
-TODO: DEFINE FUNCTION, USE CASES (0 IF age$<$something, function else)
-
-\subsection{Natural mortality}
-Upon each tick, the mortality $M$ of an individual is determined according to this formula:
-\[
-\frac{\Delta M}{\Delta t} = g(t)
-\]
-
-TODO: SAME
+We have decided to represent the system not as a whole, but rather as a list of "items", each being updated upon a "game tick".
 
 \subsection{Movement}
-The direction is determined by a gravity-like algorithm, with some constant $K$ determining the speed. Specifically, the acceleration in a given axis $a$ for the individual $b$ is:
-\[
-\frac{\partial V_a}{\partial t} = \sum_\text{For\:each\:individual\:i}(\frac{\Delta a}{\sqrt{\text{distance}}}*K*\text{something})
-\]
+The direction is determined by a gravity-like algorithm, with some constant $K$ determining the speed. Specifically, the acceleration $\mathbf a$ in a given axis (eg. $x$), towards an individual $i$, is:
+\begin{equation}
+\label{eqn:acc_singola}
+\mathbf{a}_x(i) = \frac{\Delta x}{\text{Distance}}*G*\frac{i_\text{weight}}{\text{Distance}^2}
+\end{equation}
+The reader may recognize the above formula as Newton's law of gravity, where $m_1=1$ and $m_2$ is replaced by $i_\text{weight}$. $i_\text{weight}$ is a factor calculated upon each tick. For example, if an individual is thirsty, water sources will have a high $i_\text{weight}$.\\
+The total acceleration $\mathbf A$ in a given axis (eg. $x$) is:
+\begin{equation}
+\label{eqn:acc_totale}
+\mathbf{A}_x = \sum_i \mathbf{a}_x(i)
+\end{equation}
+i.e. the sum of all accelerations.
 
+\subsection{Thirst}
+Each individual has a "thirst" variable, which determines its attraction towards water sources. Upon reaching a water source, its thirst becomes negative; thirst increases linearly with time, following this formula:
+\[
+\frac{d}{dt}\text{Thirst} = K
+\]
+where $K$ is some constant.\\
+The weight $w$ of water sources used in the computation of movement is related to thirst:
+\[
+w = \begin{cases}
+0&\text{for Thirst}<0\\
+\text{Thirst}&\text{else}
+\end{cases}
+\]
+The above formula can be understood as: "If the individual is thirsty, it seeks (is attracted to) water sources; if the individual is not thirsty ($\text{Thirst}<0$), it neither seeks, \textit{nor avoids} water sources."\\
+If the function was simply $w = \text{Thirst}$, individuals would actively avoid water sources when not thirsty, and this is not desirable.
 \section{Formal study}
 This section provides a simple analysis of the system, based on the study of the algorithms employed.
 
-\subsection{Population}
-The population $P$ at the instant $t+1$ is given by:
+\subsection{Movement}
+\paragraph{Variables} $x$, $y$, $V_x$, $V_y$\\
+\\
 \[
-P(t+1) = N_{rate} * P(t) - M*P(t) = (N_{rate} - M) * P(t)
+\frac{dx}{dt}=V_x
 \]
 \[
-\lim_{t\rightarrow \infty} P(t) = (N_{rate} - M)^t\]
-with $N_{rate}$ being the natality rate and $M$ the mortality.
-Therefore, the transfer function of the population for this system is:
-\[
-P(t) = (N_{rate} - M)^t
+\frac{dy}{dt}=V_y
 \]
+The algorithms presented in the "Implementation" (\ref{eqn:acc_singola}, \ref{eqn:acc_totale}) were defined in terms of acceleration; to create the mathematical model, it is sufficient to rewrite them in terms of "derivative of velocity".
 \[
-\frac{\partial P}{\partial t}=(N_{rate} - M)^t \log(N_{rate} - M)
+\frac{\partial}{\partial t}V_x(i) = \mathbf{a}_x(i) = \frac{\Delta x}{\text{Distance}}*G*\frac{i_\text{weight}}{\text{Distance}^2}
 \]
 
+\[
+\frac{\partial}{\partial t}V_x = \mathbf{A}_x = \sum_i \frac{\partial}{\partial t}V_x(i)
+\]
+
+\subsection{Thirst}
+\paragraph{Variables} Thirst, weight $w$ of water sources\\
+\\
+\[
+\frac{d}{dt}\text{Thirst} = K
+\]
+\[
+w = \begin{cases}
+0&\text{for Thirst}<0\\
+\text{Thirst}&\text{else}
+\end{cases}
+\]
 \end{document}
