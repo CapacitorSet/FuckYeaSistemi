@@ -1,4 +1,6 @@
-
+/* Prey
+ * Green, has thirst, escapes from Predators
+ */
 
 public class Prey extends Individual {
 

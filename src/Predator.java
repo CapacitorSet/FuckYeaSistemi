@@ -1,4 +1,6 @@
-
+/* Predator
+ * Red, has thirst and hunger (hunts Preys)
+ */
 
 public class Predator extends Individual {
 
