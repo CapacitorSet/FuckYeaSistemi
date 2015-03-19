@@ -9,6 +9,7 @@
 		<javac srcdir="src" destdir="build/classes" includeantruntime="false">
 			<classpath>
 				<pathelement location="src/lwjgl.jar"/>
+				<pathelement location="src/opencsv-3.3.jar"/>
 				<pathelement location="src/"/>
 				<pathelement location="natives/lwjgl.jar"/>
 				<pathelement location="natives/"/>
@@ -31,6 +32,7 @@
 			<sysproperty key="java.library.path" value="native/"/>
 			<classpath>
 				<pathelement location="src/lwjgl.jar"/>
+				<pathelement location="src/opencsv-3.3.jar"/>
 				<pathelement location="src/"/>
 			</classpath>
 		</java>

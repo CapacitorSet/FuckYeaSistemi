@@ -2,10 +2,13 @@
  * Red, has thirst and hunger (hunts Preys)
  */
 
+import java.util.Random;
+
 public class Predator extends Individual {
 
 	int thirst;
 	int hunger;
+      Random random;
 
 	Predator(Simulazione simulazione, float x, float y) {
 		super(simulazione, x, y);
@@ -19,6 +22,7 @@ public class Predator extends Individual {
 		this.maxSpeed = 50;
 		this.thirst = 0;
 		this.hunger = 0;
+           this.random = new Random();
 		factor.put("WaterSource", thirst);
 		factor.put("Prey", hunger);
 	}
@@ -35,11 +39,20 @@ public class Predator extends Individual {
 		 * not negative (actively escaping from water sources).
 		 */
 		factor.put("WaterSource", (thirst > 0 ? thirst : 0));
-		factor.put("Prey", (hunger > 0 ? hunger : 0));
+		factor.put("Prey", (hunger > 0 ? hunger : 100));
+
+		if (random.nextInt(2100)==0) {
+			simulazione.fikifiki(new Predator(simulazione, x, y));
+		}
 	}
 
+public void interactWith(WaterSource w) {
+System.out.println("a");
+}
+
 	public void interactWith(Item i) {
-		if (i instanceof WaterSource && distanceTo(i) <= 10) {
+		if (i instanceof WaterSource && distanceTo(i) <= 10 && thirst > 0) {
+			i.beConsumed();
 			// If close to a water source, drink!
 			thirst = -1000;
 		}
@@ -49,4 +62,8 @@ public class Predator extends Individual {
 			hunger = -2000;
 		}
 	}
+    
+public void beConsumed() {
+        return;
+    }
 }

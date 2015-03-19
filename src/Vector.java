@@ -22,10 +22,10 @@ public class Vector {
 
     public void add(Vector v) {
         if (Double.isNaN(v.dX)) {
-            throw new ArithmeticException("Vector dX is NaN!");
+            v.dX = 0;
         }
         if (Double.isNaN(v.dY)) {
-            throw new ArithmeticException("Vector dY is NaN!");
+            v.dY = 0;
         }
         
         this.dX += v.dX;

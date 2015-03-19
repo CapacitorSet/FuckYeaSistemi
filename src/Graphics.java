@@ -1,7 +1,7 @@
 // Nothing to see here, just copied from somewhere at StackOverflow and customized a bit
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+
+import static java.nio.file.StandardOpenOption.*; import java.nio.file.*; import java.io.*; import java.nio.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -51,6 +51,11 @@ public class Graphics {
 		IntBuffer height = BufferUtils.createIntBuffer(1);
 
 		Simulazione simulazione = new Simulazione();
+		Path p = Paths.get("./data.csv");
+		try {
+OutputStream out = new BufferedOutputStream( Files.newOutputStream(p, CREATE, APPEND));
+
+
 
 		while (glfwWindowShouldClose(window) != GL_TRUE) {
 			glfwGetFramebufferSize(window, width, height);
@@ -69,7 +74,7 @@ public class Graphics {
 			glMatrixMode(GL_MODELVIEW);
 
 			/* <code>  */
-			simulazione.tick();
+			simulazione.tick(out);
 			/* </code> */
 
 			glfwSwapBuffers(window);
@@ -77,6 +82,9 @@ public class Graphics {
 			width.flip();
 			height.flip();
 		}
+} catch (IOException e) {
+System.out.println("IO exception upon opening data file!");
+}
 		glfwDestroyWindow(window);
 		keyCallback.release();
 		glfwTerminate();
