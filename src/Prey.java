@@ -43,7 +43,7 @@ public class Prey extends Individual {
 
 	public void interactWith(Item i) {
 		if (i instanceof WaterSource && distanceTo(i) <= 10 && ((WaterSource) i).amount > 0 && thirst > 0) {
-                i.beConsumed();
+            i.beConsumed();
 			// If close to a water source, drink!
 			thirst = -100;
 		}
