@@ -70,9 +70,18 @@ public class Simulazione extends JFrame {
             out.write(',');
             out.write(stats.get("Predator").toString().getBytes());
             out.write('\n');
+            
+            out.flush();
+            
+            if (stats.get("Prey") == 0 && stats.get("Predator") == 0) {
+                System.out.println("Predators and Preys have extincted!");
+                System.exit(0);
+            }
 
             stats.clear();
         }
+        
+        
 
         for (Item a : deaths) {
             despawn(a);

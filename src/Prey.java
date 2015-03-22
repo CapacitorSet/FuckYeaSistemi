@@ -29,8 +29,6 @@ public class Prey extends Individual {
 	public void customTick() {
 		thirst += 2; // Increase the "thirst" (attraction to water sources)
 
-		if (thirst > 1000) die("Thirst");
-
 		/* If the prey is no longer thirsty, its attraction to water sources is zero (no effect whatsoever),
 		 * not negative (actively escaping from water sources).
 		 */
@@ -42,14 +40,9 @@ public class Prey extends Individual {
 	}
 
 	public void interactWith(Item i) {
-		if (i instanceof WaterSource && distanceTo(i) <= 10 && ((WaterSource) i).amount > 0 && thirst > 0) {
-            i.beConsumed();
+		if (i instanceof WaterSource && distanceTo(i) <= 10 && thirst > 0) {
 			// If close to a water source, drink!
 			thirst = -100;
 		}
 	}
-
-    public void beConsumed() {
-        return;
-    }
 }
