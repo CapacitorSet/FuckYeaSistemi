@@ -68,11 +68,11 @@ public abstract class Individual extends GravityItem {
         this.x += dt * this.xVelocity;
         // Make sure the individual does not escape the game field
 		if (this.x < 0) this.x = 0;
-		if (this.x > Graphics.width) this.x = Graphics.width;
+		if (this.x > simulazione.simwidth) this.x = simulazione.simwidth;
 
         this.y += dt * this.yVelocity;
 		if (this.y < 0) this.y = 0;
-		if (this.y > Graphics.height) this.y = Graphics.height;
+		if (this.y > simulazione.simheight) this.y = simulazione.simheight;
     }
 
 	public final void die(String reason) {

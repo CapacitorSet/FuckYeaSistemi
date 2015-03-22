@@ -22,7 +22,7 @@
 		<jar destfile="build/jar/FuckYeaSistemi.jar" basedir="build/classes">
 			<zipgroupfileset dir="." includes="**/*.jar" />
 			<manifest>
-				<attribute name="Main-Class" value="Graphics"/>
+				<attribute name="Main-Class" value="Simulazione"/>
 			</manifest>
 		</jar>
 	</target>
